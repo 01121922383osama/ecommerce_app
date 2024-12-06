@@ -1,6 +1,13 @@
 import 'package:ecommerce_app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
+final List<String> _text = [
+  'All',
+  'Shoes',
+  'Clothes',
+  'Bags',
+];
+
 class BuildIconsWidget extends StatelessWidget {
   final bool isSelected;
   const BuildIconsWidget({super.key, required this.isSelected});
@@ -20,15 +27,13 @@ class BuildIconsWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
-                  color: isSelected ? AppColors.black : Colors.grey.shade200,
                   border: Border.all(
                     color: AppColors.black.withOpacity(0.2),
                   ),
                 ),
                 child: Text(
                   _text[index],
-                  style: TextStyle(
-                    color: isSelected ? AppColors.white : AppColors.black,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -41,10 +46,3 @@ class BuildIconsWidget extends StatelessWidget {
     );
   }
 }
-
-final List<String> _text = [
-  'All',
-  'Shoes',
-  'Clothes',
-  'Bags',
-];

@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/core/constants/app_strings.dart';
 import 'package:ecommerce_app/core/extension/navigations.dart';
 import 'package:ecommerce_app/core/locator/injection.dart';
+import 'package:ecommerce_app/core/utils/app_localizations.dart';
 import 'package:ecommerce_app/core/widgets/custom_button.dart';
 import 'package:ecommerce_app/core/widgets/custom_text.dart';
 import 'package:ecommerce_app/core/widgets/custom_textfield.dart';
@@ -40,19 +40,19 @@ class SignUpPage extends StatelessWidget {
               return ListView(
                 padding: const EdgeInsets.all(20),
                 children: [
-                  const BuildContentWidget(
-                    text1: '${AppStrings.signUp}!',
-                    text2: AppStrings.createAccount,
+                  BuildContentWidget(
+                    text1: '${context.tr.signUp}!',
+                    text2: context.tr.createAccount,
                   ),
                   const SizedBox(height: 20),
                   CustomTextfield(
-                    hinttext: AppStrings.email,
+                    hinttext: context.tr.email,
                     controller: context.read<AuthCubit>().signUpEmail,
                     prefixIcon: const Icon(Icons.email_outlined),
                   ),
                   const SizedBox(height: 15),
                   CustomTextfield(
-                    hinttext: AppStrings.passwrod,
+                    hinttext: context.tr.password,
                     controller: context.read<AuthCubit>().signUpPassword,
                     prefixIcon: const Icon(Icons.lock_outline_rounded),
                   ),
@@ -62,9 +62,8 @@ class SignUpPage extends StatelessWidget {
                         ? const Center(
                             child: CircularProgressIndicator.adaptive(),
                           )
-                        : const CustomText(
-                            text: AppStrings.signUp,
-                            color: Colors.white,
+                        : CustomText(
+                            text: context.tr.signUp,
                           ),
                     onPressed: () {
                       final email =
@@ -79,16 +78,16 @@ class SignUpPage extends StatelessWidget {
                       } else {
                         customShowTost(
                           context: context,
-                          message: AppStrings.enterEmailPassword,
+                          message: context.tr.enterEmailPassword,
                           color: Colors.red,
                         );
                       }
                     },
                   ),
                   const SizedBox(height: 15),
-                  const Center(
+                  Center(
                     child: CustomText(
-                      text: AppStrings.or,
+                      text: context.tr.or,
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
@@ -98,17 +97,17 @@ class SignUpPage extends StatelessWidget {
                     onPressed: () {},
                   ),
                   const SizedBox(height: 20),
-                  const Center(
+                  Center(
                     child: CustomText(
-                      text: AppStrings.or,
+                      text: context.tr.or,
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                   const SizedBox(height: 20),
                   BuildRitchTextWidget(
-                    text1: AppStrings.alreadyHaveAccount,
-                    text2: AppStrings.signIn,
+                    text1: context.tr.alreadyHaveAccount,
+                    text2: context.tr.signIn,
                     onTap: () {
                       context.pop();
                     },

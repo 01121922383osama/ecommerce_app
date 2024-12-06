@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/core/constants/app_colors.dart';
 import 'package:ecommerce_app/features/home/data/models/product_model.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,6 @@ class BuildGridContainerWidget extends StatelessWidget {
           (context, index) {
             final product = products[index];
             final heroTag = 'product_${product.name}';
-
             return GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -68,7 +68,6 @@ class BuildGridContainerWidget extends StatelessWidget {
                     color: Colors.primaries[index % Colors.primaries.length]
                         .withOpacity(0.3),
                   ),
-                  color: Colors.grey.shade100,
                 ),
                 child: Stack(
                   children: [
@@ -77,9 +76,23 @@ class BuildGridContainerWidget extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: NetworkImage(product.image!),
+                        ),
+                        alignment: Alignment.center,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: CachedNetworkImage(
+                            imageUrl: product.image!,
                             fit: BoxFit.cover,
+                            placeholder: (context, url) => Container(
+                              color: Colors.grey[300],
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                              color: Colors.grey[300],
+                              child: const Icon(Icons.error),
+                            ),
                           ),
                         ),
                       ),
@@ -101,7 +114,6 @@ class BuildGridContainerWidget extends StatelessWidget {
                               child: Text(
                                 '\$${product.price}',
                                 style: const TextStyle(
-                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -130,7 +142,6 @@ class BuildGridContainerWidget extends StatelessWidget {
                             child: Text(
                               product.name!,
                               style: const TextStyle(
-                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                               maxLines: 2,

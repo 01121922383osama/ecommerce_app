@@ -1,12 +1,24 @@
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_app/config/routes/app_routes.dart';
+import 'package:ecommerce_app/core/extension/navigations.dart';
+import 'package:ecommerce_app/core/locator/injection.dart';
+import 'package:ecommerce_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:ecommerce_app/features/profile/manager/language/language_cubit.dart';
+import 'package:ecommerce_app/features/profile/manager/themes/theme_cubite.dart';
+import 'package:ecommerce_app/features/profile/presentation/widget/buildtitle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.read<ThemeCubite>().isDark(context);
+    log(isDark.toString());
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -16,10 +28,15 @@ class ProfilePage extends StatelessWidget {
               // Profile Image and Name
               Column(
                 children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundImage: NetworkImage(
-                      'https://picsum.photos/200',
+                  CachedNetworkImage(
+                    imageUrl: 'https://picsum.photos/200',
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                    imageBuilder: (context, imageProvider) => CircleAvatar(
+                      radius: 50,
+                      backgroundImage: imageProvider,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -31,11 +48,10 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text(
+                  const Text(
                     'Fscreation441@gmail.com',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.grey[600],
                     ),
                   ),
                 ],
@@ -44,82 +60,105 @@ class ProfilePage extends StatelessWidget {
               // Menu Items
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      spreadRadius: 1,
-                      blurRadius: 10,
-                    ),
-                  ],
                 ),
                 child: Column(
                   children: [
-                    _buildMenuItem(
+                    BuildTile(
                       icon: Icons.person_outline,
-                      title: 'Personal Details',
+                      title: 'Moffa',
                       onTap: () {},
                     ),
                     _buildDivider(),
-                    _buildMenuItem(
+                    BuildTile(
                       icon: Icons.shopping_bag_outlined,
                       title: 'My Order',
                       onTap: () {},
                     ),
                     _buildDivider(),
-                    _buildMenuItem(
+                    BuildTile(
                       icon: Icons.favorite_border,
                       title: 'My Favourites',
                       onTap: () {},
                     ),
                     _buildDivider(),
-                    _buildMenuItem(
-                      icon: Icons.local_shipping_outlined,
-                      title: 'Shipping Address',
-                      onTap: () {},
+                    BlocBuilder<LanguageCubit, String>(
+                      builder: (context, currentLang) {
+                        return BuildTile(
+                          icon: Icons.language,
+                          title: 'arabic',
+                          onTap: () {},
+                          trailing: DropdownButton<String>(
+                            value: currentLang,
+                            items: const [
+                              DropdownMenuItem(
+                                value: 'en',
+                                child: Text('English'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'ar',
+                                child: Text('العربية'),
+                              ),
+                            ],
+                            onChanged: (String? newValue) {
+                              if (newValue != null) {
+                                context
+                                    .read<LanguageCubit>()
+                                    .changeLanguage(newValue);
+                              }
+                            },
+                          ),
+                        );
+                      },
                     ),
                     _buildDivider(),
-                    _buildMenuItem(
-                      icon: Icons.credit_card,
-                      title: 'My Card',
+                    BuildTile(
+                      icon: Icons.light_mode,
+                      title: 'Light',
                       onTap: () {},
+                      trailing: PopupMenuButton<ThemeRefrence>(
+                        onSelected: (value) {
+                          context.read<ThemeCubite>().chageTheme(value);
+                        },
+                        itemBuilder: (context) {
+                          return [
+                            const PopupMenuItem(
+                              value: ThemeRefrence.system,
+                              child: Text('System'),
+                            ),
+                            const PopupMenuItem(
+                              value: ThemeRefrence.light,
+                              child: Text('Light'),
+                            ),
+                            const PopupMenuItem(
+                              value: ThemeRefrence.dark,
+                              child: Text('Dark'),
+                            ),
+                          ];
+                        },
+                      ),
                     ),
                     _buildDivider(),
-                    _buildMenuItem(
-                      icon: Icons.settings_outlined,
-                      title: 'Settings',
-                      onTap: () {},
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              // Help Section
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      spreadRadius: 1,
-                      blurRadius: 10,
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    _buildMenuItem(
-                      icon: Icons.help_outline,
-                      title: 'FAQs',
-                      onTap: () {},
-                    ),
-                    _buildDivider(),
-                    _buildMenuItem(
-                      icon: Icons.privacy_tip_outlined,
-                      title: 'Privacy Policy',
-                      onTap: () {},
+                    BlocProvider(
+                      create: (context) => locator<AuthCubit>(),
+                      child: BlocBuilder<AuthCubit, AuthState>(
+                        builder: (context, state) {
+                          return BuildTile(
+                            icon: Icons.logout,
+                            title: 'Logout',
+                            onTap: () {
+                              context.read<AuthCubit>().sigOut().then(
+                                (value) {
+                                  if (context.mounted) {
+                                    context.pushNamedAndRemoveUntil(
+                                        pageRoute: AppRoutes.signIn);
+                                  }
+                                },
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -137,46 +176,6 @@ class ProfilePage extends StatelessWidget {
       thickness: 1,
       indent: 20,
       endIndent: 20,
-    );
-  }
-
-  Widget _buildMenuItem({
-    required IconData icon,
-    required String title,
-    required VoidCallback onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(icon, color: Colors.black),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            const Icon(
-              Icons.arrow_forward_ios,
-              size: 16,
-              color: Colors.grey,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

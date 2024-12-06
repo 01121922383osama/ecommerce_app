@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/core/constants/app_strings.dart';
 import 'package:ecommerce_app/core/extension/navigations.dart';
+import 'package:ecommerce_app/core/utils/app_localizations.dart';
 import 'package:ecommerce_app/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class BuildRitchTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        text: text1 ?? AppStrings.dontHaveAccount,
+        text: text1 ?? context.tr.dontHaveAccount,
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w900,
@@ -28,11 +28,10 @@ class BuildRitchTextWidget extends StatelessWidget {
         ),
         children: <TextSpan>[
           TextSpan(
-            text: text2 ?? AppStrings.signUp,
+            text: text2 ?? context.tr.signUp,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = onTap ??

@@ -12,7 +12,6 @@ class BuildBottomNavBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      indicatorColor: Colors.grey.shade400,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       selectedIndex: index,
       onDestinationSelected: onDestinationSelected,

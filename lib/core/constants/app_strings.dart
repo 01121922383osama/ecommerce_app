@@ -1,17 +1,21 @@
+import 'package:flutter/material.dart';
+import '../utils/app_localizations.dart';
+
 class AppStrings {
   AppStrings._();
-  static const String appName = 'Ecommerce App';
-  static const String email = 'Email';
-  static const String passwrod = 'Password';
-  static const String or = 'Or';
-  static const String signIn = 'Sign In';
-  static const String signUp = 'Sign Up';
-  static const String enterEmailPassword = 'Please enter email and password';
-  static const String createAccount = 'create an new account';
-  static const String alreadyHaveAccount = 'Already have an account? ';
-  static const String welcome = 'Welcome!';
-  static const String plzLogin = 'Pleaze login or sign up to continue our app';
-  static const String google = 'Google';
-  static const String dontHaveAccount = 'Don\'t have an account? ';
-  static const String getStarted = 'Get Started';
+  
+  static String getAppName(BuildContext context) => context.tr.appName;
+  static String getEmail(BuildContext context) => context.tr.email;
+  static String getPassword(BuildContext context) => context.tr.password;
+  static String getOr(BuildContext context) => context.tr.or;
+  static String getSignIn(BuildContext context) => context.tr.signIn;
+  static String getSignUp(BuildContext context) => context.tr.signUp;
+  static String getEnterEmailPassword(BuildContext context) => context.tr.enterEmailPassword;
+  static String getCreateAccount(BuildContext context) => context.tr.createAccount;
+  static String getAlreadyHaveAccount(BuildContext context) => context.tr.alreadyHaveAccount;
+  static String getWelcome(BuildContext context) => context.tr.welcome;
+  static String getPleaseLogin(BuildContext context) => context.tr.pleaseLogin;
+  static String getGoogle(BuildContext context) => context.tr.google;
+  static String getDontHaveAccount(BuildContext context) => context.tr.dontHaveAccount;
+  static String getGetStarted(BuildContext context) => context.tr.getStarted;
 }

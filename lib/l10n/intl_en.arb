@@ -1,0 +1,16 @@
+{
+    "appName": "Ecommerce App",
+    "email": "Email",
+    "password": "Password",
+    "or": "Or",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "enterEmailPassword": "Please enter email and password",
+    "createAccount": "Create a new account",
+    "alreadyHaveAccount": "Already have an account? ",
+    "welcome": "Welcome!",
+    "pleaseLogin": "Please login or sign up to continue our app",
+    "google": "Google",
+    "dontHaveAccount": "Don't have an account? ",
+    "getStarted": "Get Started"
+}

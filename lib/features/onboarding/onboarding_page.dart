@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/config/routes/app_routes.dart';
-import 'package:ecommerce_app/core/constants/app_strings.dart';
 import 'package:ecommerce_app/core/extension/navigations.dart';
+import 'package:ecommerce_app/core/utils/app_localizations.dart';
 import 'package:ecommerce_app/core/widgets/custom_text.dart';
 import 'package:ecommerce_app/features/onboarding/body_onboarding_page.dart';
 import 'package:ecommerce_app/features/onboarding/manager/toggel_cubit.dart';
@@ -53,23 +53,18 @@ class OnboardingPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          backgroundColor: WidgetStateProperty.all(
-                            Colors.black,
-                          ),
                         ),
                         onPressed: () {
                           context.pushNamedAndRemoveUntil(
                             pageRoute: AppRoutes.signIn,
                           );
                         },
-                        child: const CustomText(
-                          text: AppStrings.getStarted,
+                        child: CustomText(
+                          text: context.tr.getStarted,
                           fontSize: 20,
-                          color: Colors.white,
                         ),
                       )
                     : CircleAvatar(
-                        backgroundColor: Colors.black,
                         radius: 30,
                         child: IconButton(
                           onPressed: () {
@@ -81,7 +76,6 @@ class OnboardingPage extends StatelessWidget {
                           icon: const Icon(
                             Icons.forward,
                             size: 35,
-                            color: Colors.white,
                           ),
                         ),
                       ),

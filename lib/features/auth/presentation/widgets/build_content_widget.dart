@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/core/constants/app_strings.dart';
+import 'package:ecommerce_app/core/utils/app_localizations.dart';
 import 'package:ecommerce_app/core/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +17,10 @@ class BuildContentWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        Center(
+        const Center(
           child: CircleAvatar(
             radius: 60,
-            backgroundColor: Colors.grey.withOpacity(0.3),
-            child: const CustomText(
+            child: CustomText(
               text: 'Logo',
               fontSize: 30,
               fontWeight: FontWeight.bold,
@@ -30,13 +29,13 @@ class BuildContentWidget extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         CustomText(
-          text: text1 ?? AppStrings.welcome,
+          text: text1 ?? context.tr.welcome,
           fontSize: 30,
           fontWeight: FontWeight.bold,
         ),
         const SizedBox(height: 5),
         CustomText(
-          text: text2 ?? AppStrings.plzLogin,
+          text: text2 ?? context.tr.pleaseLogin,
           fontSize: 16,
           fontWeight: FontWeight.w400,
         ),

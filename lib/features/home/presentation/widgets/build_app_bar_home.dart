@@ -16,13 +16,11 @@ class BuildAppBarHome extends StatelessWidget {
           leading: CircleAvatar(
             backgroundColor: Colors.black,
             child: IconButton(
-              color: Colors.white,
               onPressed: () {},
               icon: const Icon(Icons.menu),
             ),
           ),
           trailing: const CircleAvatar(
-            backgroundColor: Colors.grey,
             radius: 30,
             backgroundImage: NetworkImage(
               'https://i.pravatar.cc/300',

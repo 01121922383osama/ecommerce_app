@@ -13,15 +13,16 @@ import 'package:ecommerce_app/features/home/domain/usecases/get_bags_usecase.dar
 import 'package:ecommerce_app/features/home/domain/usecases/get_clothes_usecase.dart';
 import 'package:ecommerce_app/features/home/domain/usecases/get_shoes_usecase.dart';
 import 'package:ecommerce_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final locator = GetIt.instance;
 Future<void> init() async {
+  await dotenv.load(fileName: ".env");
   final Supabase supabase = await Supabase.initialize(
-    url: 'https://lcaqddxggijwgnevhsol.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjYXFkZHhnZ2lqd2duZXZoc29sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMDgwNzgsImV4cCI6MjA0NjU4NDA3OH0.cMg74OvwHsRIQfrsYvDi8Ko0QjEEXyvvlaH49bJNOSQ',
+    url: dotenv.env['URL']!,
+    anonKey: dotenv.env['ANONKEY']!,
   );
   // cubit
   locator.registerFactory(() => AuthCubit(

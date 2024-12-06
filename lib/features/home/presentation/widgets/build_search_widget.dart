@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/core/constants/app_colors.dart';
 import 'package:ecommerce_app/core/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -24,8 +23,7 @@ class BuildSearchWidget extends StatelessWidget {
             ),
             SizedBox(width: 10),
             CircleAvatar(
-              backgroundColor: AppColors.black,
-              child: Icon(Icons.menu, color: AppColors.white),
+              child: Icon(Icons.menu),
             ),
           ],
         ),

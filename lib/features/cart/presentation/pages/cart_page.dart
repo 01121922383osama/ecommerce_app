@@ -8,15 +8,13 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: true,
+        backgroundColor: Colors.transparent,
         title: const Text(
           'My Cart',
           style: TextStyle(
-            color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
@@ -31,8 +29,9 @@ class CartPage extends StatelessWidget {
                   orElse: () => 0,
                 ),
                 child: IconButton(
-                  icon: const Icon(Icons.shopping_cart_outlined,
-                      color: Colors.black),
+                  icon: const Icon(
+                    Icons.shopping_cart_outlined,
+                  ),
                   onPressed: () {},
                 ),
               );
@@ -44,21 +43,19 @@ class CartPage extends StatelessWidget {
         builder: (context, state) {
           return state.maybeWhen(
             initial: () => const Center(child: CircularProgressIndicator()),
-            empty: () => Center(
+            empty: () => const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.shopping_cart_outlined,
                     size: 100,
-                    color: Colors.grey[400],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Text(
                     'Your cart is empty',
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.grey[600],
                     ),
                   ),
                 ],
@@ -76,15 +73,7 @@ class CartPage extends StatelessWidget {
                         margin: const EdgeInsets.only(bottom: 16),
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 1,
-                              blurRadius: 10,
-                            ),
-                          ],
                         ),
                         child: Row(
                           children: [
@@ -116,8 +105,7 @@ class CartPage extends StatelessWidget {
                                     item.product.description ?? '',
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
+                                    style: const TextStyle(
                                       fontSize: 12,
                                     ),
                                   ),
@@ -135,7 +123,6 @@ class CartPage extends StatelessWidget {
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
-                                          color: Colors.grey[100],
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
@@ -188,19 +175,10 @@ class CartPage extends StatelessWidget {
                 ),
                 Container(
                   padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.vertical(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 10,
-                        offset: const Offset(0, -5),
-                      ),
-                    ],
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -211,7 +189,6 @@ class CartPage extends StatelessWidget {
                           vertical: 12,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.grey[100],
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
@@ -228,7 +205,6 @@ class CartPage extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () {},
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -264,7 +240,6 @@ class CartPage extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
@@ -277,13 +252,11 @@ class CartPage extends StatelessWidget {
                                 'Proceed to Checkout',
                                 style: TextStyle(
                                   fontSize: 18,
-                                  color: Colors.white,
                                 ),
                               ),
                               SizedBox(width: 8),
                               Icon(
                                 Icons.arrow_forward,
-                                color: Colors.white,
                               ),
                             ],
                           ),
