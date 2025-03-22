@@ -14,8 +14,6 @@ class ThemeCubite extends Cubit<ThemeMode> {
       case ThemeRefrence.dark:
         emit(ThemeMode.dark);
         break;
-      default:
-        emit(ThemeMode.system);
     }
   }
 

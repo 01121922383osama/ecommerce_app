@@ -26,15 +26,9 @@ class EcommerceApp extends StatelessWidget {
         BlocProvider(
           create: (context) => locator.locator<HomeCubit>()..getAllProducts(),
         ),
-        BlocProvider(
-          create: (context) => CartCubit()..getCartItems(),
-        ),
-        BlocProvider(
-          create: (context) => ThemeCubite(),
-        ),
-        BlocProvider(
-          create: (context) => LanguageCubit(),
-        ),
+        BlocProvider(create: (context) => CartCubit()..getCartItems()),
+        BlocProvider(create: (context) => ThemeCubite()),
+        BlocProvider(create: (context) => LanguageCubit()),
       ],
       child: BlocBuilder<ThemeCubite, ThemeMode>(
         builder: (context, theme) {
@@ -53,10 +47,7 @@ class EcommerceApp extends StatelessWidget {
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                supportedLocales: const [
-                  Locale('en'),
-                  Locale('ar'),
-                ],
+                supportedLocales: const [Locale('en'), Locale('ar')],
                 builder: (context, child) {
                   return Directionality(
                     textDirection:
